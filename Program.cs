@@ -52,7 +52,13 @@
             Console.Beep(800, 1000);
             Console.WriteLine("Everything's gone!");
 
-            
+            /*
+             *This is a simple console application that demonstrates various features of the C# console.
+             * And it is a great way to learn about console applications in C#.
+             */
+
+            // Wait for user input before closing
+            Console.ReadKey();
         }
     }
 }
