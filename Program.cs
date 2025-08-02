@@ -1,5 +1,5 @@
-﻿using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace BroCode
 {
@@ -8,17 +8,12 @@ namespace BroCode
         static void Main(string[] args)
         {
             Console.WriteLine("Are you a computer nerd!?");
+
             // Text color
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Your face is cyan color from the screen!");
             Console.ResetColor();
-            // Loop through all colors:
-            /*foreach (ConsoleColor color in Enum.GetValues(typeof(ConsoleColor)))
-            {
-                Console.ForegroundColor = color;
-                Console.WriteLine($"This is {color}");
-            }
-            Console.ResetColor();*/
+
             // Fake Loading/Progress Bar
             for (int i = 0; i <= 100; i += 10)
             {
@@ -26,66 +21,92 @@ namespace BroCode
                 System.Threading.Thread.Sleep(200);
             }
             Console.WriteLine("\nDone!");
+
             // ASCII Art or Animations
             string[] spinner = { "|", "/", "-", "\\" };
-            for (int i = 0; i < 20; i++)
+            for (int k = 0; k < 20; k++)
             {
-                Console.Write($"\r{spinner[i % spinner.Length]} Working...");
+                Console.Write($"\r{spinner[k % spinner.Length]} Working...");
                 System.Threading.Thread.Sleep(100);
             }
+
             // Position Text Anywhere
             Console.SetCursorPosition(10, 5);
             Console.WriteLine("Hello from (10,5)!");
+
             // Console Title
             Console.Title = "CodeMike Console App";
 
-            // Matrix Effect (Mini Version) - commented out properly
-            /*
-            Random rand = new Random();
-            while (true)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write((char)rand.Next(33, 126));
-                System.Threading.Thread.Sleep(10);
-            }
-            */
-
-            // Clear Screen Dramatically and Play Sound
+            // Clear Screen Dramatically and Play Sound (Windows only)
             Console.Clear();
-            Console.Beep(800, 1000);
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Console.Beep(800, 1000);
+            }
+            else
+            {
+                Console.WriteLine("Beep not supported on this platform.");
+            }
+
             Console.WriteLine("Releasing your infos!");
 
-            /*
-             *This is a simple console application that demonstrates various features of the C# console.
-             * And it is a great way to learn about console applications in C#.
-             */
+            // Variable demos
+            int x = 5;
+            int y = 10;
+            int z = x + y;
 
-            int x; // declaration
-            x = 5; // initialization
 
-            int y = 10; // declaration and initialization
+            double height = 5.9;
+            bool alive = true;
+            char symbol = 'M';
 
-            int z = x + y; // addition
+            Console.WriteLine("What's your name?");
+            string? name = Console.ReadLine(); // Nullable string to handle empty input
 
-            int age = 21; // variable declaration (whole integer)
-            double height = 5.9; // variable declaration (decimal number)
-            bool alive = true; // variable declaration (boolean)
-            char symbol = 'M'; // variable declaration (character) (Could also be feks. @)
-            string name = "Code Mike"; // variable declaration (string)
+            if (string.IsNullOrWhiteSpace(name)) // Check if the input is null or whitespace
+            {
+                name = "Anonymous"; // Default value if no name is provided
+            }
+
+            Console.WriteLine("Hello " + name);
+
+
+            // Ask the user to enter their age
+            Console.WriteLine("What's your age?");
+
+            // Read the user's input from the console (can be null)
+            string? input = Console.ReadLine();
+
+            // Declare a nullable integer to store the age
+            int? age = null;
+
+            // Check if the input is not null or whitespace AND try to parse it into an integer
+            if (!string.IsNullOrWhiteSpace(input) && int.TryParse(input, out int parsedAge))
+            {
+                // If parsing succeeds, store the value in the nullable age variable
+                age = parsedAge;
+
+                // Output the parsed age
+                Console.WriteLine($"Your age is: {age}");
+            }
+            else
+            {
+                // If input was empty or invalid (e.g. not a number), print an error message
+                Console.WriteLine("Invalid input. Age not set.");
+            }
+
 
             Console.WriteLine("Hello " + name);
             Console.WriteLine("Your height is " + height + "cm");
             Console.WriteLine("Are you alive? " + alive);
             Console.WriteLine("Your symbol is: " + symbol);
+            Console.WriteLine("Your age is: " + age);
 
-            //Constants = immutable values that cannot be changed adds security and performance to programs
-            const double PI = 3.14159; // constant declaration
-            /*PI = 420; This line will cause a compile-time error because PI is a constant and cannot be changed*/
+            // Constants
+            const double PI = 3.14159;
+            Console.WriteLine("Value of PI is: " + PI);
 
-            // Type Casting = converting one data type to another
-            // useful when we accept user input as a string and need to convert it to an integer or double
-            //different data types can do different things, so we need to convert them to the right type
-
+            // Type casting
             double a = 3.14;
             int b = Convert.ToInt32(a);
 
@@ -93,13 +114,13 @@ namespace BroCode
             double d = Convert.ToDouble(c);
 
             int e = 10;
-            String f = Convert.ToString(e);
+            string f = Convert.ToString(e);
 
-            String g = "$";
+            string g = "$";
             char h = Convert.ToChar(g);
 
-            String i = "true";
-            bool j = Convert.ToBoolean(i);
+            string strBool = "true"; // <-- changed from 'i'
+            bool j = Convert.ToBoolean(strBool);
 
             Console.WriteLine(b.GetType());
             Console.WriteLine(d.GetType());
@@ -108,9 +129,9 @@ namespace BroCode
             Console.WriteLine(j.GetType());
 
 
+
             // Wait for user input before closing
             Console.ReadKey();
         }
     }
 }
-
