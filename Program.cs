@@ -128,6 +128,45 @@ namespace BroCode
             Console.WriteLine(h.GetType());
             Console.WriteLine(j.GetType());
 
+            double xx = 3.0;
+            double yy = 4.0;
+
+            // Math methods
+            double result1 = Math.Pow(xx, 2);           // x squared
+            double result2 = Math.Sqrt(yy);             // square root of y
+            double result3 = Math.Abs(-10);            // absolute value
+            double result4 = Math.Round(3.75);         // round to nearest
+            double result5 = Math.Ceiling(3.14);       // round up
+            double result6 = Math.Floor(3.99);         // round down
+            double result7 = Math.Max(x, y);           // larger of x or y
+            double result8 = Math.Min(x, y);           // smaller of x or y
+
+            // Output
+            Console.WriteLine($"x^2 = {result1}");
+            Console.WriteLine($"√y = {result2}");
+            Console.WriteLine($"Absolute value of -10 = {result3}");
+            Console.WriteLine($"Rounded 3.75 = {result4}");
+            Console.WriteLine($"Ceiling of 3.14 = {result5}");
+            Console.WriteLine($"Floor of 3.99 = {result6}");
+            Console.WriteLine($"Max of x and y = {result7}");
+            Console.WriteLine($"Min of x and y = {result8}");
+
+            // Create a random number generator
+            Random rand = new Random();
+
+            // Generate random integers
+            int randomInt = rand.Next();            // any non-negative int
+            int random1to10 = rand.Next(1, 11);     // between 1 and 10 (inclusive lower, exclusive upper)
+
+            // Generate random double between 0.0 and 1.0
+            double randomDouble = rand.NextDouble();
+
+            // Output
+            Console.WriteLine($"Random int: {randomInt}");
+            Console.WriteLine($"Random int between 1 and 10: {random1to10}");
+            Console.WriteLine($"Random double between 0.0 and 1.0: {randomDouble}");
+
+
 
 
             // Wait for user input before closing
